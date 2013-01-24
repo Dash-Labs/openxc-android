@@ -15,7 +15,5 @@ before_install:
 install:
   - mvn install -DskipTests=true
 notifications:
-  hipchat: <%= ENV['HIPCHAT_TOKEN'] %>@Ford
-env:
-  global:
-    secure: "iotiUK43hkNVsFw2WnL3DuvQTLnPj5vkYQ+R/L6I73rX/J2dMyMrjW3VPxA/\nj0cMgpMv1WCrt15qYfuuLO/kCPwedT6oD+zhAdM6REsy/Te0/4Hg5IPS3Lvd\nZ096QEg88wXbcJGaC7uVQ1nX1phIUBhu6LV37vBzOYChQIEwatE="
+  hipchat:
+    - secure: "Qi99dMt+44DuIdcvkgps4V/SFbot5Sew7Jz1wkDKSzbTPDZsV2cPyRCdqKMD\nOmb1/2Q9Zyud1RYEUNvNWLpP2WspeM7bfO5ZboM3qh+wh16/pOECM4+RMAeQ\nsOAoBFMwqlzK9lgG3CgBhL+VpsWltf/Kd5/E4bft4g6E16vQQjQ="
