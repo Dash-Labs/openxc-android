@@ -1,6 +1,8 @@
 language: java
 before_install:
   # download the latest android sdk and unzip
+  - sudo apt-get update -qq
+  - sudo apt-get install ia32-libs
   - wget http://dl.google.com/android/android-sdk_r21.0.1-linux.tgz
   - tar -zxf android-sdk_r21.0.1-linux.tgz
   # setup your ANDROID_HOME and PATH environment variables
