@@ -1,7 +1,12 @@
+*~
 target
 bin
 gen
 .DS_Store
+.idea/
+*.iml
+*.ipr
+*.iws
 /com/
 reference
 *.asc
