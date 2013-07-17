@@ -209,7 +209,6 @@ public class VehicleManager extends Service implements SourceCallback {
             throw new NoValueException();
         }
 
-        Log.d(TAG, "Looking up measurement for " + measurementType);
         try {
             RawMeasurement rawMeasurement = mRemoteService.get(
                     BaseMeasurement.getIdForClass(measurementType));
@@ -589,7 +588,7 @@ public class VehicleManager extends Service implements SourceCallback {
             mPipeline.addSource(mRemoteSource);
 
             mRemoteBoundLock.lock();
-            mRemoteBoundCondition.signal();
+            mRemoteBoundCondition.signalAll();
             mRemoteBoundLock.unlock();
         }
 

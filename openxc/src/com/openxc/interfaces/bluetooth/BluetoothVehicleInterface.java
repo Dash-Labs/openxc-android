@@ -74,9 +74,8 @@ public class BluetoothVehicleInterface extends BytestreamDataSource
     @Override
     public void stop() {
         super.stop();
-        mSocket = null;
-        mInStream = null;
-        mOutStream = null;
+        Log.d(TAG, "Stopping Bluetooth interface");
+        disconnect();
     }
 
     @Override
@@ -99,10 +98,21 @@ public class BluetoothVehicleInterface extends BytestreamDataSource
 
         Log.d(TAG, "Disconnecting from the socket " + mSocket);
         try {
-            mOutStream.close();
-            mInStream.close();
+            if(mInStream != null) {
+                mInStream.close();
+                mInStream = null;
+            }
         } catch(IOException e) {
             Log.w(TAG, "Unable to close the input stream", e);
+        }
+
+        try {
+            if(mOutStream != null) {
+                mOutStream.close();
+                mOutStream = null;
+            }
+        } catch(IOException e) {
+            Log.w(TAG, "Unable to close the output stream", e);
         }
 
         if(mSocket != null) {
@@ -126,12 +136,13 @@ public class BluetoothVehicleInterface extends BytestreamDataSource
         if(mSocket == null) {
             try {
                 mSocket = mDeviceManager.connect(mAddress);
-                connected();
                 connectStreams();
+                connected();
             } catch(BluetoothException e) {
                 String message = "Unable to connect to device at address "
                     + mAddress;
                 Log.w(TAG, message, e);
+                disconnected();
                 throw new DataSourceException(message, e);
             }
         }

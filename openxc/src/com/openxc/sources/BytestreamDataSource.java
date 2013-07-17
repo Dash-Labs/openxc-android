@@ -15,7 +15,7 @@ import android.util.Log;
 public abstract class BytestreamDataSource extends ContextualVehicleDataSource
         implements Runnable {
     // TODO could let subclasses override this
-    private final static int READ_BATCH_SIZE = 128;
+    private final static int READ_BATCH_SIZE = 512;
     private boolean mRunning = false;
     private final Lock mConnectionLock = new ReentrantLock();
     protected final Condition mDeviceChanged = mConnectionLock.newCondition();
@@ -42,8 +42,8 @@ public abstract class BytestreamDataSource extends ContextualVehicleDataSource
             return;
         }
         Log.d(getTag(), "Stopping " + getTag() + " source");
-        disconnect();
         mRunning = false;
+        disconnect();
     }
 
     public void run() {
@@ -74,7 +74,7 @@ public abstract class BytestreamDataSource extends ContextualVehicleDataSource
             try {
                 received = read(bytes);
             } catch(IOException e) {
-                Log.e(getTag(), "Unable to read response");
+                Log.e(getTag(), "Unable to read response", e);
                 mConnectionLock.unlock();
                 disconnect();
                 continue;
