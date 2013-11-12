@@ -83,7 +83,7 @@ public class MockedLocationSink extends ContextualVehicleDataSink {
 
     private void makeLocationComplete(Location location) {
         if(android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                16 /*android.os.Build.VERSION_CODES.JELLY_BEAN*/) {
             // TODO When android 4.2 hits the maven repository we can simplify
             // this and call the makeComplete method directly, until then we use
             // reflection to load it without getting a compilation error.
